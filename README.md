@@ -1,8 +1,18 @@
 # JavaFX Bank Application
 
-An educational desktop application by Andrew Badie using Java, JavaFX, FXML, and local text-file storage.
+[![Build](https://github.com/Andrew-Badie/Object_Oriented_Bank_Application/actions/workflows/build.yml/badge.svg)](https://github.com/Andrew-Badie/Object_Oriented_Bank_Application/actions/workflows/build.yml)
 
-Manager and customer screens demonstrate account creation/deletion, deposits, withdrawals, purchases, and balance checks. The original controllers and FXML are preserved; a launcher and Maven configuration have been added to make setup explicit.
+A JavaFX desktop banking application built to practise object-oriented design. A manager can create and delete customer accounts; customers can deposit, withdraw, make purchases and check their balance. Account tiers (Silver, Gold, Platinum) are derived from the balance and change the fee charged on purchases.
+
+**Tech:** Java 21, JavaFX 21, FXML, Maven, file-based persistence
+
+## Features
+
+- Role-based login for managers and customers
+- Manager screen: create and delete customer accounts
+- Customer screen: deposit, withdraw, purchase, and check balance
+- Tiered accounts: Silver (< 10,000), Gold (10,000 – 19,999), Platinum (20,000+), with purchase fees of 20, 10 and 0 respectively
+- Account data saved to local text files between sessions
 
 ## Requirements
 
@@ -26,9 +36,7 @@ mvn javafx:run
 
 Check that both version commands identify JDK 21. Maven launches `hellofx.BankApplication`, which loads the login view from `/hellofx/hellofx.fxml`.
 
-These instructions require the launcher/build-configuration update. They were checked against the source layout but **have not yet been build-tested or GUI-tested**.
-
-## Demo walkthrough
+## Try it
 
 Use synthetic data only.
 
@@ -40,8 +48,6 @@ Use synthetic data only.
 6. Withdraw 20 and check for a balance of 130.
 7. Use a purchase of 50 to explore purchase fees; for a Silver account the current code charges an additional 20.
 8. Log out and close the application.
-
-This is a suggested manual check, not a record of tests already passed.
 
 The program writes a file named after the customer in the process working directory (normally the repository root when launched as above). Use `demo_customer` for this walkthrough; do not use filenames, paths, or real personal data as usernames. The demo file is ignored by Git. Close the application before deleting it to reset the demonstration.
 
@@ -62,15 +68,13 @@ src/main/resources/hellofx/
 
 FXML resources share the controllers' package path so the existing relative resource lookups continue to work.
 
-## Design and limitations
+## Design
 
-Controllers handle interface events and read/write local text records. Customer levels are determined by balance: Silver below 10,000, Gold from 10,000 to under 20,000, and Platinum from 20,000. Purchase fees are 20 for Silver and 10 for Gold, with no additional fee for Platinum.
+Each FXML view has its own controller: `Controller` handles login and navigation, `Controller2` handles manager actions, and `Customer` handles customer transactions and the tier/fee rules. Each customer's record (credentials, balance, tier) is persisted to a local text file.
 
-This is a coursework demonstration, not a production banking system. It uses plaintext local records and demo authentication. Input validation, file handling, and transaction logic need further work: nonnumeric amounts can raise exceptions, usernames are used directly as file paths, and purchases require a positive remaining balance. There is no automated test suite yet.
+## Known limitations
 
-## Portfolio demonstration
-
-After completing the manual walkthrough, capture the login, manager, and customer screens using the demo account. A short recording can show account creation, a deposit, a withdrawal, and the updated balance. No screenshots or successful test results are claimed by this update.
+This is a coursework project, not a production banking system: credentials are stored in plaintext local files, demo login is hard-coded for the manager, non-numeric amounts are not yet validated, and usernames are used directly as file names.
 
 ## Troubleshooting
 
