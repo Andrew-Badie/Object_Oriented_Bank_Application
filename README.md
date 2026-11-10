@@ -82,3 +82,7 @@ This is a coursework project, not a production banking system: credentials are s
 - If Maven reports an unsupported Java release, configure JAVA_HOME/PATH for JDK 21 and check `mvn -version` again.
 - A graphical display is required; compilation alone does not validate JavaFX screens.
 - Run Maven from the directory containing `pom.xml`.
+
+## AI assistance
+
+The application code is my original coursework. The Maven build, CI workflow and this README were updated later with AI assistance and are recorded in the commit history.
